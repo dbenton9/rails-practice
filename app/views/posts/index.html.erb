@@ -1,0 +1,52 @@
+<div class="header">
+<div class="container">
+  <h1>threadly</h1>
+</div>
+</div>
+
+<div class="main">
+<div class="container">
+  
+  <!-- Form goes here -->
+  <%= form_for(@new_post) do |f| %>
+    <%= f.text_field :comment, :placeholder => "Share your thoughts" %>
+  <%= f.submit "Post", :class => "btn" %>
+  <% end %>
+
+  <ul class="comments">
+    <% @all_posts.each do |p| %>
+      <li>
+        <%= p.comment %>
+        <br>
+        <%= link_to 'Edit', edit_post_path(p), :class => 'btn-primary' %>
+        <%= link_to 'Delete', p, :method => :delete, :class => 'btn-primary' %>
+        <br>
+        Last Updated:
+        <%= p.updated_at %>
+        Created: 
+        <%= p.created_at %>
+
+        <!-- each comment should populate with old comments
+        CURRENT STATUS
+        each comment populating with all comments for trial
+        NEXT OBJECTIVE
+        use CONTROLLER to store current comment into "oldcomments" before edit is made
+        AFTER
+        populate oldcomments under corresponding current comment -->
+        
+        <div>
+          <ul id="oldComments">
+            <% @all_posts.each do |s| %>
+              <li>
+                <%= s.comment %>
+              </li>
+            <%end%>
+          </ul>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  
+
+</div>
+</div>
